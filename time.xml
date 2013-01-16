@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project basedir="." default="compile">
+	
+	<!-- use closure compiler to minify specified files -->
+    <taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="../build/google-compiler/compiler.jar"/>
+    <target name="closure.compile">
+        <jscomp compilationLevel="simple" output="${basedir}/library/assets/js/gallery.min.js">
+            <sources dir="${basedir}/library/assets/js">
+              <file name="gallery.js"/>
+            </sources>
+        </jscomp>
+        <jscomp compilationLevel="simple" output="${basedir}/library/assets/js/helpers.min.js">
+            <sources dir="${basedir}/library/assets/js">
+              <file name="helpers.js"/>
+            </sources>
+        </jscomp>
+        <jscomp compilationLevel="simple" output="${basedir}/library/assets/js/json2.min.js">
+            <sources dir="${basedir}/library/assets/js">
+              <file name="json2.js"/>
+            </sources>
+        </jscomp>
+        <jscomp compilationLevel="simple" output="${basedir}/library/assets/js/plugins.min.js">
+            <sources dir="${basedir}/library/assets/js">
+              <file name="plugins.js"/>
+            </sources>
+        </jscomp>
+        <jscomp compilationLevel="simple" output="${basedir}/library/assets/js/polldaddy.min.js">
+            <sources dir="${basedir}/library/assets/js">
+              <file name="polldaddy.js"/>
+            </sources>
+        </jscomp>
+        <jscomp compilationLevel="simple" output="${basedir}/library/assets/js/responsive-ads.min.js">
+            <sources dir="${basedir}/library/assets/js">
+              <file name="responsive-ads.js"/>
+            </sources>
+        </jscomp>
+        <jscomp compilationLevel="simple" output="${basedir}/library/assets/js/tweet-widget.min.js">
+            <sources dir="${basedir}/library/assets/js">
+              <file name="tweet-widget.js"/>
+            </sources>
+        </jscomp>
+        <jscomp compilationLevel="simple" output="${basedir}/library/assets/js/video-widget.min.js">
+            <sources dir="${basedir}/library/assets/js">
+              <file name="video-widget.js"/>
+            </sources>
+        </jscomp>
+    </target>
+    
+	<!-- compile .scss and .sass files in the /library/assets/scss directory using SASS -->
+	<target name="sass.compile">
+		<property name="sass.dir" value="${basedir}/library/assets/scss" />
+		<property name="css.dir" value="${basedir}/library/assets/css" />
+
+		<apply executable="sass" dest="${css.dir}" verbose="true" force="true" failonerror="true">
+			<arg value="--unix-newline" />
+			<arg value="--compass" />
+			<srcfile />
+			<targetfile />
+			<fileset dir="${sass.dir}" includes="**/*.scss,**/*.sass" excludes="**/_*" />
+			<firstmatchmapper>
+				<globmapper from="*.sass" to="*.css" />
+				<globmapper from="*.scss" to="*.css" />
+			</firstmatchmapper>
+		</apply>
+	</target>
+	
+</project>
